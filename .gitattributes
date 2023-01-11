@@ -1,0 +1,2 @@
+*.nuget filter=lfs diff=lfs merge=lfs -text
+Uno.UI.4.7.0-PullRequest-10878-65607-10878.nupkg filter=lfs diff=lfs merge=lfs -text

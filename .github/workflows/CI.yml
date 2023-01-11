@@ -1,0 +1,42 @@
+name: Build
+
+on:
+   pull_request:
+
+jobs:
+  Check_Package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: download
+        run: wget 'https://dev.azure.com/uno-platform/1dd81cbd-cb35-41de-a570-b0df3571a196/_apis/build/builds/65607/artifacts?artifactName=NugetPackages&api-version=7.0&%24format=zip' -O NugetPackages.zip
+
+      - uses: montudor/action-zip@v1
+        with:
+          args: unzip -qq NugetPackages.zip -d .
+
+      - shell: bash
+        run: |
+          ls ./NugetPackages -la > output.log
+      - name: Upload output file
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-log-file
+          path: output.log
+
+      - name: copy
+        run: cp ./NugetPackages/vslatest/Uno.UI.4.7.0-PullRequest-10878-65607-10878.nupkg ./Uno.UI.4.7.0-PullRequest-10878-65607-10878.nupkg
+
+      - uses: workgroupengineering/Uno.PackageDiff@V1
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          repository: 'https://github.com/workgroupengineering/Test_Action.git'
+          pr-id: '${{ github.event.number }}'
+          base: 'Uno.UI'
+          other: 'Uno.UI.4.7.0-PullRequest-10878-65607-10878.nupkg'
+          diffignore: './PackageDiffIgnore.xml'
+
+
+  
