@@ -31,7 +31,7 @@ jobs:
 
       - uses: workgroupengineering/Uno.PackageDiff@V1
         with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
+          token: '${{ secrets.PAT }}'
           repository: 'https://github.com/workgroupengineering/Test_Action.git'
           pr-id: '${{ github.event.number }}'
           base: 'Uno.UI'
