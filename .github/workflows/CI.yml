@@ -2,6 +2,7 @@ name: Build
 
 on:
    pull_request_target:
+    types: [opened, synchronize]
 
 jobs:
   Check_Package:
@@ -17,28 +18,12 @@ jobs:
         with:
           args: unzip -qq NugetPackages.zip -d .
 
-      - shell: bash
-        run: |
-          ls ./NugetPackages -la > output.log
-
-      - name: Set up secret file
-        env:
-          DEBUG_PASSWORD: ${{ secrets.PAT }}
-        run: |
-          echo $DEBUG_PASSWORD >>  output.log
-
-      - name: Upload output file
-        uses: actions/upload-artifact@v3
-        with:
-          name: output-log-file
-          path: output.log
-
       - name: copy
         run: cp ./NugetPackages/vslatest/Uno.UI.4.7.0-PullRequest-10878-65607-10878.nupkg ./Uno.UI.4.7.0-PullRequest-10878-65607-10878.nupkg
 
       - uses: workgroupengineering/Uno.PackageDiff@V1
         with:
-          token: '${{ secrets.PAT }}'
+          token: '${{ secrets.GITHUB_TOKEN }}'
           repository: 'https://github.com/workgroupengineering/Test_Action.git'
           pr-id: '${{ github.event.number }}'
           base: 'Uno.UI'
