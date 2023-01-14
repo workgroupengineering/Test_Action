@@ -28,8 +28,8 @@ steps:
     echo "PR $(PR_ID)"
   displayName: 'Run a multi-line script'
   env:
-    PR: '${{ $(System.PullRequest.PullRequestNumber) }}'
-    S: '${{ Input.Script }}'
+    PR: $(System.PullRequest.PullRequestNumber)
+    S: $(Input.Script)
 
 - task: GitHubComment@0
   inputs:
