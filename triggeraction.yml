@@ -26,5 +26,5 @@ steps:
   inputs:
     gitHubConnection: 'Comment GitHub Test'
     repositoryName: 'workgroupengineering/Test_Action'
-    id: '$(SYSTEM_PULLREQUEST_PULLREQUESTNUMBER)'
+    id: '${{ System.PullRequest.PullRequestNumber }})'
     comment: 'test'
