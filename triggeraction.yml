@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 variables:
-  pr_id: $BUILD_SOURCEBRANCH
+  pr_id: 'test'
 
 pr: 
   paths:
@@ -23,11 +23,13 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-    echo "$(INPUT_SCRIPT)"
-    echo "$(BUILD_SOURCEBRANCH)"
-    echo "$(SYSTEM_PULLREQUEST_PULLREQUESTNUMBER)"
+    echo "$(S)"
+    echo "$(PR)"
     echo "PR $(PR_ID)"
   displayName: 'Run a multi-line script'
+  env:
+    PR: {{ System.PullRequest.PullRequestNumber }}
+    S: {{ Input.Script }}
 
 - task: GitHubComment@0
   inputs:
