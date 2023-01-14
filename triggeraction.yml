@@ -24,7 +24,7 @@ steps:
 
 - task: GitHubComment@0
   inputs:
-    gitHubConnection: 'github.com_workgroupengineering'
-    repositoryName: '$(Build.Repository.Name)'
+    gitHubConnection: 'Comment GitHub Test'
+    repositoryName: 'workgroupengineering/Test_Action'
     id: '1'
     comment: 'test'
