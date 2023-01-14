@@ -3,18 +3,17 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-pr:
+pr: 
+  paths:
+    include:
+    - '/'
 
 pool:
-- task: GitHubComment@0
-  inputs:
-    gitHubConnection: 'github.com_workgroupengineering'
-    repositoryName: '$(Build.Repository.Name)'
-    id: '1'
-    comment: 'test'
-  vmImage: ubuntu-latest
+
+  vmImage: 'ubuntu-latest'
 
 steps:
+    
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
@@ -22,3 +21,10 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: GitHubComment@0
+  inputs:
+    gitHubConnection: 'github.com_workgroupengineering'
+    repositoryName: '$(Build.Repository.Name)'
+    id: '1'
+    comment: 'test'
