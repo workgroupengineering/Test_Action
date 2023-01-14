@@ -25,7 +25,7 @@ steps:
     echo See https://aka.ms/yaml
     echo "$(INPUT_SCRIPT)"
     echo "$(BUILD_SOURCEBRANCH)"
-    echo "$SYSTEM_PULLREQUEST_PULLREQUESTNUMBER"
+    echo "$(SYSTEM_PULLREQUEST_PULLREQUESTNUMBER)"
     echo "PR $(PR_ID)"
   displayName: 'Run a multi-line script'
 
