@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  pr_id: ${{ System.PullRequest.PullRequestNumber }}
+
 pr: 
   paths:
     include:
@@ -20,11 +23,12 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    echo "PR $(PR_ID)"
   displayName: 'Run a multi-line script'
 
 - task: GitHubComment@0
   inputs:
     gitHubConnection: 'Comment GitHub Test'
     repositoryName: 'workgroupengineering/Test_Action'
-    id: '$(SYSTEM_PULLREQUEST_PULLREQUESTNUMBER)'
+    id: '$(PR_ID)'
     comment: 'test'
